@@ -1,5 +1,9 @@
 # Presentations
 
+Austin G. Davis-Richardson
+
+## License
+
 Copyright (C) 2014 Austin G. Davis-Richardson
 
 This program is free software: you can redistribute it and/or modify it
