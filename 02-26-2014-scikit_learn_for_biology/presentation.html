@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SciKit-Learn for Biologists</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <style type="text/css">
+      @import url(http://fonts.googleapis.com/css?family=Droid+Serif);
+      @import url(http://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      /* Slideshow styles */
+      body {
+        font-family: 'Droid Serif';
+        font-size: 20px;
+      }
+      h1, h2, h3  {
+        font-family: 'Yanone Kaffeesatz';
+      }
+      code {
+        font-family: 'Menlo';
+      }
+      a {
+        color: #00aaFF;
+      }
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+        font-size: 12px;
+      }
+      .pull-right {
+        width: 75%;
+        float: right;
+        padding-top: 2em;
+      }
+      .inverse {
+        background: #272822;
+        color: #aaaaaa;
+        text-shadow: 0 0 20px #333;
+      }
+      .inverse a {
+        color: #FFaa00;
+        text-decoration: none;
+      }
+      .inverse h1, .inverse h2, .inverse h3 {
+        color: #efefef;
+      }
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+class: center, middle, inverse
+
+# Sci-Kit Learn for Biology
+
+Austin G. Davis-Richardson
+
+Triplett Group
+
+Microbiology + Cell Science
+
+University of Florida
+
+.footnote[
+slides: https://github.com/audy/presentations
+]
+
+---
+
+class: center, middle, inverse
+
+# What is Sci-Kit Learn?
+
+---
+
+# SciKit-Learn
+
+![](ml_map.png)
+
+.footnote[
+http://peekaboo-vision.blogspot.com/2013/01/machine-learning-cheat-sheet-for-scikit.html
+]
+
+---
+
+class: center, middle, inverse
+
+# Advantages
+Warning: Computer Speak
+---
+
+# Conistent API
+
+## Rapid Prototyping and Evaluation
+
+```python
+#!/usr/bin/env python
+
+classifiers = [
+  DecisionTreeClassifier(),
+  RandomForestClassifier(),
+  SVC(), # Support Vector Machine
+  ...
+]
+
+for classifier in classifiers:
+  print cross_val_score(classifier, features, labels).mean()
+
+0.73
+0.66
+0.89
+```
+
+---
+
+class: center, middle, inverse
+
+# Well-Documented
+
+---
+
+![well documented](./sklearn-docu.png)
+
+.footnote[http://scikit-learn.org/stable/auto_examples/plot_multioutput_face_completion.html]
+
+---
+
+![well documented](./sklearn-docu2.png)
+
+.footnote[http://scikit-learn.org/stable/auto_examples/plot_multioutput_face_completion.html]
+---
+# Consistent API
+
+## Chaining Steps
+
+```python
+#!/usr/bin/env python
+
+pipeline = Pipeline([('scale', StandardScaler()),
+                     ('f_selection', SelectKBest()),
+                     ('pca', PCA()),
+                     ('classify', RandomForestClassifier())
+                    ])
+
+cross_val_score(pipeline, features_labels)
+```
+
+```python
+pipeline = Pipeline([('scale', StandardScaler()),
+                     ('f_selection', SelectKBest()),
+                     ('mds', MDS()),
+                     ('classify', LinearRegression())
+                    ])
+
+cross_val_score(pipeline, features_labels)
+```
+
+---
+
+class: center, middle, inverse
+# Classification
+
+---
+
+# Classification
+
+- Decision Tree
+  - Random Forest
+  - Adaptive Boost
+- Support Vector Machine
+- Etc...
+
+---
+
+class: center, middle, inverse
+# Regression
+
+---
+
+class: center, middle, inverse
+# Clustering
+
+---
+
+class: center, middle, inverse
+# Feature Selection
+
+---
+
+class: center, middle, inverse
+# Preprocessing
+
+---
+
+class: center, middle, inverse
+# Evaluation
+
+---
+
+class: center, middle, inverse
+# Parameter Tuning
+
+---
+
+class: center, middle, inverse
+# Examples
+
+- Sequence Binning
+- Sequence Classification
+- Outlier Detection/Removal
+- Feature Weighing
+
+---
+
+# Some Examples
+  (with a little BioPython)
+
+---
+
+# DIY "RDP Classifier"
+
+```python
+# setup classifier
+classifier = Pipeline(['hash', HashingVectorizer()],
+                      ['classifier', NBClassifier()])
+
+# cross-validate
+cross_val_score(classifier, sequences, labels)
+```
+
+(Also works as a metagenome binner)
+
+Similar to:
+
+- CLAMS
+- Quikr
+- MetaWatt
+
+---
+
+# Outlier Removal
+(One Class SVM)
+
+---
+
+# Artifact Detection
+
+(regress n-mer with average quality)
+
+---
+
+# Feature Selection
+
+(which k-mers best separate genome A from genome B?)
+
+---
+
+# Transcriptomics
+
+---
+
+    </textarea>
+    <script src="http://gnab.github.io/remark/downloads/remark-0.6.0.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      var slideshow = remark.create();
+    </script>
+  </body>
+</html>
