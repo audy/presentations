@@ -85,15 +85,46 @@ http://peekaboo-vision.blogspot.com/2013/01/machine-learning-cheat-sheet-for-sci
 
 ---
 
+# SciKit-Learn
+
+- **Supervised Learning**
+    - Linear Models
+    - Random Forests, Decision Trees, AdaBoost
+    - Support Vector Machines
+    - Outlier Detection (1-Class SVM)
+- **Unsupervised Learning**
+    - Clustering: Spectral, KMeans, MinBatch KMeans
+    - Dimension Reduction (PCA, NMDS)
+- **Evaluation**
+    - Accuracy
+    - ROC/AUC
+    - RMSE
+    - Silhouette Index
+    - Cross-Validation
+      - Nested/Stratified/Leave-K-Out/Leave-One-Label-Out
+    - "Dummy" Algorithms
+- **Parameter Tuning**
+    - Grid Search
+    - Randomized Search
+
+*and much more!*
+---
+
 class: center, middle, inverse
 
 # Advantages
-Warning: Computer Speak
----
 
+---
 # Conistent API
 
 ## Rapid Prototyping and Evaluation
+
+- Algorithms expose a common API:
+    1. `fit`
+    2. `predict`
+    3. `transform`
+- Allows for **Rapid Prototyping**
+- Easy to chain algorithms
 
 ```python
 #!/usr/bin/env python
@@ -112,24 +143,6 @@ for classifier in classifiers:
 0.66
 0.89
 ```
-
----
-
-class: center, middle, inverse
-
-# Well-Documented
-
----
-
-![well documented](./media/sklearn-docu.png)
-
-.footnote[http://scikit-learn.org/stable/auto_examples/plot_multioutput_face_completion.html]
-
----
-
-![well documented](./media/sklearn-docu2.png)
-
-.footnote[http://scikit-learn.org/stable/auto_examples/plot_multioutput_face_completion.html]
 ---
 # Consistent API
 
@@ -159,107 +172,54 @@ cross_val_score(pipeline, features_labels)
 
 ---
 
-class: center, middle, inverse
-# Classification
+# SciKit-Learn
 
----
-
-# Classification
-
-- Decision Tree
-  - Random Forest
-  - Adaptive Boost
-- Support Vector Machine
-- Etc...
+- Integrates with
+  - Pandas
+  - MatPlotLib
+  - IPython Notebook
 
 ---
 
 class: center, middle, inverse
-# Regression
+
+# Well-Documented
 
 ---
 
-class: center, middle, inverse
-# Clustering
+![well documented](./media/sklearn-docu.png)
+
+.footnote[http://scikit-learn.org/stable/auto_examples/plot_multioutput_face_completion.html]
 
 ---
 
-class: center, middle, inverse
-# Feature Selection
+![well documented](./media/sklearn-docu2.png)
+
+.footnote[http://scikit-learn.org/stable/auto_examples/plot_multioutput_face_completion.html]
 
 ---
-
-class: center, middle, inverse
-# Preprocessing
-
----
-
-class: center, middle, inverse
-# Evaluation
-
----
-
-class: center, middle, inverse
-# Parameter Tuning
-
----
-
-class: center, middle, inverse
-# Examples
-
-- Sequence Binning
-- Sequence Classification
-- Outlier Detection/Removal
-- Feature Weighing
-
----
+class: middle, center, inverse
 
 # Some Examples
-  (with a little BioPython)
 
 ---
 
-# DIY "RDP Classifier"
-
-```python
-# setup classifier
-classifier = Pipeline(['hash', HashingVectorizer()],
-                      ['classifier', NBClassifier()])
-
-# cross-validate
-cross_val_score(classifier, sequences, labels)
-```
-
-(Also works as a metagenome binner)
-
-Similar to:
-
-- CLAMS
-- Quikr
-- MetaWatt
+class: middle, center
+# Example 1/4
+## Separate Genome from Metagenome
 
 ---
 
-# Outlier Removal
-(One Class SVM)
+class: middle, center
+# Example 2/4
+## 16S rRNA Sequence Classifier
 
 ---
 
-# Artifact Detection
-
-(regress n-mer with average quality)
+class: middle, center, inverse
 
 ---
 
-# Feature Selection
-
-(which k-mers best separate genome A from genome B?)
-
----
-
-# Transcriptomics
-
----
 
     </textarea>
     <script src="http://gnab.github.io/remark/downloads/remark-0.6.0.min.js" type="text/javascript">
