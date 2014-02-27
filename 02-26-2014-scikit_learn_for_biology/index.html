@@ -87,32 +87,45 @@ http://peekaboo-vision.blogspot.com/2013/01/machine-learning-cheat-sheet-for-sci
 
 # SciKit-Learn
 
+- Python Library
+- Developed on GitHub
+    - https://github.com/scikit-learn/scikit-learn/
+- Still an early release: 0.14b
+- Open Source: MITv3
+
+![pulse](./media/pulse.png)
+
+---
+
+# SciKit-Learn
+
 - **Supervised Learning**
     - Linear Models
-    - Random Forests, Decision Trees, AdaBoost
+    - Ensemble Methods
     - Support Vector Machines
-    - Outlier Detection (1-Class SVM)
 - **Unsupervised Learning**
-    - Clustering: Spectral, KMeans, MinBatch KMeans
-    - Dimension Reduction (PCA, NMDS)
+- **Semisupervised**
+    - Label Propagation
+- **Data Transformation**
+    - Scaling
+    - Normalizing
+    - Dimension Reduction
 - **Evaluation**
-    - Accuracy
-    - ROC/AUC
-    - RMSE
-    - Silhouette Index
+    - Many Metrics
     - Cross-Validation
-      - Nested/Stratified/Leave-K-Out/Leave-One-Label-Out
-    - "Dummy" Algorithms
+    - "Dummy" Classifiers/Regressors
 - **Parameter Tuning**
-    - Grid Search
-    - Randomized Search
+    - Random/Grid Search
+- Streaming/out-of-core learning
 
-*and much more!*
+.footnote[
+Full Documentation: http://scikit-learn.org/stable/modules/classes.html
+]
 ---
 
 class: center, middle, inverse
 
-# Advantages
+# Why SciKit-Learn
 
 ---
 # Consistent API
@@ -120,9 +133,8 @@ class: center, middle, inverse
 ## Rapid Prototyping and Evaluation
 
 - Algorithms expose a common API:
-    1. `estimators` - regression
-    2. `predictors` - classification/clustering
-    3. `transformers` - dimension reduction, normalization, scaling
+    1. `estimators` - regression/classification/clustering
+    2. `transformers` - dimension reduction, normalization, scaling
 - Allows for **Rapid Prototyping**
     - Can easily swap an algorithm by changing the class.
 - Easy to chain algorithms
@@ -130,9 +142,9 @@ class: center, middle, inverse
 
 ```python
 classifiers = [
-  DecisionTreeClassifier(),
-  RandomForestClassifier(),
-  SVC()
+  SGDClassifier(), # linear model
+  RandomForestClassifier(), # ensemble
+  SVC() # support vector machine
 ]
 
 for classifier in classifiers:
@@ -146,22 +158,22 @@ for classifier in classifiers:
 ```python
 pipeline = Pipeline([('scale', StandardScaler()),
                      ('f_selection', SelectKBest()),
-                     ('pca', PCA()),
-                     ('classify', RandomForestClassifier())
+                     ('pca', PCA(n_components=5)),
+                     ('classify', SVC())
                     ])
 
 cross_val_score(pipeline, features, labels)
 ```
 
 ```python
-pipeline = Pipeline([('scale', StandardScaler()),
-                     ('f_selection', SelectKBest()),
-                     ('mds', MDS()),
-                     ('classify', LinearRegression())
+pipeline = Pipeline([('f_selection', SelectKBest()),
+                     ('classify', DecisionTreeClassifier())
                     ])
 
 cross_val_score(pipeline, features, labels)
 ```
+
+**Entire** pipeline is fitted to training data.
 
 ---
 
@@ -174,22 +186,6 @@ class: center, middle, inverse
 ![well documented](./media/sklearn-docu.png)
 
 .footnote[http://scikit-learn.org/stable/auto_examples/plot_multioutput_face_completion.html]
-
----
-class: center, middle, inverse
-
-# Active
-
----
-
-# Active
-
-- Development occuring on GitHub
-    - https://github.com/scikit-learn/scikit-learn/
-- Still an early release: 0.14b
-- Open Source: MITv3
-
-![pulse](./media/pulse.png)
 
 ---
 
